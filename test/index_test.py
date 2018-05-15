@@ -11,7 +11,7 @@ class FieldElement:
                 self.num, self.prime-1)
             raise RuntimeError(error)
 
-     def __add__(self, other):
+    def __add__(self, other):
         if self.prime != other.prime:
             raise RuntimeError('Primes must be the same')
         # self.num and other.num are the actual values
