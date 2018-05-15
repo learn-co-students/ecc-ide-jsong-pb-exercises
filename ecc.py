@@ -28,7 +28,7 @@ class FieldElement:
         # self.prime is what you'll need to mod against
         # You need to return an element of the same class
         # use: self.__class__(num, prime)
-        raise NotImplementedError
+        pass
 
     def __sub__(self, other):
         if self.prime != other.prime:
@@ -37,7 +37,7 @@ class FieldElement:
         # self.prime is what you'll need to mod against
         # You need to return an element of the same class
         # use: self.__class__(num, prime)
-        raise NotImplementedError
+        pass
 
     def __mul__(self, other):
         if self.prime != other.prime:
@@ -46,13 +46,13 @@ class FieldElement:
         # self.prime is what you'll need to mod against
         # You need to return an element of the same class
         # use: self.__class__(num, prime)
-        raise NotImplementedError
+        pass
 
     def __pow__(self, n):
         # remember fermat's little theorem:
         # self.num**(p-1) % p == 1
         # you might want to use % operator on n
-        raise NotImplementedError
+        pass
 
     def __truediv__(self, other):
         if self.prime != other.prime:
@@ -65,4 +65,61 @@ class FieldElement:
         # 1/n == pow(n, p-2, p)
         # You need to return an element of the same class
         # use: self.__class__(num, prime)
-        raise NotImplementedError
+        pass
+
+class Point:
+
+    def __init__(self, x, y, a, b):
+        self.a = a
+        self.b = b
+        self.x = x
+        self.y = y
+        # x being None and y being None represents the point at infinity
+        # Check for that here since the equation below won't make sense
+        # with None values for both.
+        # make sure that the elliptic curve equation is satisfied
+        # y**2 == x**3 + a*x + b
+        # if not, throw a RuntimeError
+        pass
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y \
+            and self.a == other.a and self.b == other.b
+
+    def __ne__(self, other):
+        return self.x != other.x or self.y != other.y \
+            or self.a != other.a or self.b != other.b
+
+    def __repr__(self):
+        if self.x is None:
+            return 'Point(infinity)'
+        else:
+            return 'Point({},{})'.format(self.x, self.y)
+
+    def __add__(self, other):
+        if self.a != other.a or self.b != other.b:
+            raise RuntimeError('Points {}, {} are not on the same curve'.format(self, other))
+        # Case 0.0: self is the point at infinity,
+        # Case 0.1: other is the point at infinity,
+
+        # Case 1: self.x == other.x, self.y != other.y
+        # Result is point at infinity
+        # Remember to return an instance of this class:
+        # self.__class__(x, y, a, b)
+
+        # Case 2: self.x != other.x
+        # Formula (x3,y3)==(x1,y1)+(x2,y2)
+        # s=(y2-y1)/(x2-x1)
+        # x3=s**2-x1-x2
+        # y3=s*(x1-x3)-y1
+        # Remember to return an instance of this class:
+        # self.__class__(x, y, a, b)
+
+        # Case 3: self.x == other.x, self.y == other.y
+        # Formula (x3,y3)=(x1,y1)+(x1,y1)
+        # s=(3*x1**2+a)/(2*y1)
+        # x3=s**2-2*x1
+        # y3=s*(x1-x3)-y1
+        # Remember to return an instance of this class:
+        # self.__class__(x, y, a, b)
+        pass
