@@ -1,33 +1,5 @@
 from unittest import TestCase
-import ecc
-
-class FieldElement:
-
-    def __init__(self, num, prime):
-        self.num = num
-        self.prime = prime
-        if self.num >= self.prime or self.num < 0:
-            error = 'Num {} not in field range 0 to {}'.format(
-                self.num, self.prime-1)
-            raise RuntimeError(error)
-
-     def __add__(self, other):
-        if self.prime != other.prime:
-            raise RuntimeError('Primes must be the same')
-        # self.num and other.num are the actual values
-        # self.prime is what you'll need to mod against
-        # You need to return an element of the same class
-        # use: self.__class__(num, prime)
-        pass
-
-    def __sub__(self, other):
-        if self.prime != other.prime:
-            raise RuntimeError('Primes must be the same')
-        # self.num and other.num are the actual values
-        # self.prime is what you'll need to mod against
-        # You need to return an element of the same class
-        # use: self.__class__(num, prime)
-        pass
+from ecc import Point, FieldElement
 
 class FieldElementTest(TestCase):
 
