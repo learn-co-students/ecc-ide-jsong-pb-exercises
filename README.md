@@ -1,5 +1,8 @@
 # Ellipitical Curve Cryptography
 
+## A Note for Jimmy
+
+Just be aware that our IDE's default Python version is 2.7. We have Python 3 on the boxes, but we'll have to figure this out especially since this lab has true `__truediv__`.
 
 ### Exercise 1
 
